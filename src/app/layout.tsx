@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Judson, Noto_Sans } from "next/font/google";
+import { MotionLayer } from "@/components/motion-layer";
 import "./globals.css";
 
 const judson = Judson({
@@ -45,7 +46,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr" className={`${judson.variable} ${notoSans.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        <noscript>
+          <style>{`.preloader{display:none!important}`}</style>
+        </noscript>
+        <MotionLayer />
+        {children}
+      </body>
     </html>
   );
 }

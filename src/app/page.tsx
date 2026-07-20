@@ -16,7 +16,7 @@ export default function Home() {
               aria-label="Emplacement réservé à la vidéo de présentation"
               muted
               playsInline
-              poster="/assets/images/placeholder.svg"
+              poster="/assets/images/inside-monte-carlo-24.jpg"
             />
             <div className="hero__overlay">
               <span className="eyebrow eyebrow--light">Le média de la Principauté</span>
@@ -42,7 +42,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="editorial-section" id="magazine">
+        <section className="editorial-section" data-reveal id="magazine">
           <div className="section-heading">
             <div>
               <span className="eyebrow">Derniers récits</span>
@@ -59,9 +59,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="key-feature">
+        <section className="key-feature" data-reveal>
           <div className="key-feature__media">
-            <span className="asset-placeholder asset-placeholder--light">IMAGE 07</span>
+            <span
+              aria-hidden="true"
+              className="asset-placeholder asset-placeholder--light"
+              data-asset="IMAGE 07"
+              style={{ backgroundImage: "url(/assets/images/inside-monte-carlo-23.jpg)" }}
+            />
           </div>
           <div className="key-feature__content">
             <span className="eyebrow eyebrow--light">Accès exclusif</span>
@@ -76,7 +81,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="guardians editorial-section">
+        <section className="guardians editorial-section" data-reveal>
           <div className="section-heading section-heading--centered">
             <div>
               <span className="eyebrow">Portraits</span>
@@ -88,9 +93,18 @@ export default function Home() {
             </p>
           </div>
           <div className="guardian-grid">
-            {["IMAGE 08", "IMAGE 09", "IMAGE 10"].map((asset, index) => (
+            {[
+              { asset: "IMAGE 08", image: "/assets/images/inside-monte-carlo-14.jpg" },
+              { asset: "IMAGE 09", image: "/assets/images/inside-monte-carlo-15.jpg" },
+              { asset: "IMAGE 10", image: "/assets/images/inside-monte-carlo-16.jpg" },
+            ].map(({ asset, image }, index) => (
               <Link className="guardian-card" href="/les-gardiens-du-geste" key={asset}>
-                <span className="asset-placeholder">{asset}</span>
+                <span
+                  aria-hidden="true"
+                  className="asset-placeholder"
+                  data-asset={asset}
+                  style={{ backgroundImage: `url(${image})` }}
+                />
                 <span className="guardian-card__index">0{index + 1}</span>
                 <h3>{["Le trait", "La matière", "Le temps"][index]}</h3>
                 <p>Portrait éditorial à venir.</p>
@@ -99,7 +113,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="experiences editorial-section">
+        <section className="experiences editorial-section" data-reveal>
           <div className="section-heading">
             <div>
               <span className="eyebrow">Sélection</span>
@@ -111,7 +125,12 @@ export default function Home() {
           </div>
           <div className="experience-grid">
             <div className="experience-grid__lead">
-              <span className="asset-placeholder asset-placeholder--dark">IMAGE 11</span>
+              <span
+                aria-hidden="true"
+                className="asset-placeholder asset-placeholder--dark"
+                data-asset="IMAGE 11"
+                style={{ backgroundImage: "url(/assets/images/inside-monte-carlo-24.jpg)" }}
+              />
               <div>
                 <span>Expérience · Prochainement</span>
                 <h3>Monaco, loin du premier regard</h3>

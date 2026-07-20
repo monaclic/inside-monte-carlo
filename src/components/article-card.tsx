@@ -10,7 +10,12 @@ export function ArticleCard({ article, featured = false }: ArticleCardProps) {
   return (
     <article className="article-card" data-featured={featured || undefined}>
       <Link className="article-card__media" href={article.href} aria-label={article.title}>
-        <span className="asset-placeholder">{article.asset}</span>
+        <span
+          aria-hidden="true"
+          className="asset-placeholder"
+          data-asset={article.asset}
+          style={{ backgroundImage: `url(${article.image})` }}
+        />
         <span className="article-card__read">Lire</span>
       </Link>
       <div className="article-card__meta">

@@ -1,6 +1,6 @@
 export function Newsletter() {
   return (
-    <section className="newsletter" id="newsletter">
+    <section className="newsletter" data-reveal id="newsletter">
       <div className="newsletter__monogram" aria-hidden="true">
         IMC
       </div>

@@ -8,11 +8,13 @@ export type EditorialCard = {
   category: string;
   description: string;
   href: string;
+  image: string;
   title: string;
 };
 
 export type SectionPage = {
   eyebrow: string;
+  image: string;
   intro: string;
   paragraphs: string[];
   slug: string;
@@ -41,6 +43,7 @@ export const editorialCards: EditorialCard[] = [
     description:
       "Un récit éditorial à venir, pensé pour regarder Monaco depuis un angle plus intime.",
     href: "/magazine",
+    image: "/assets/images/inside-monte-carlo-04.jpg",
     title: "Le Rocher, à l’heure silencieuse",
   },
   {
@@ -49,6 +52,7 @@ export const editorialCards: EditorialCard[] = [
     description:
       "Une adresse, une rencontre et un accès singulier seront révélés dans ce prochain format.",
     href: "/la-cle-monte-carlo",
+    image: "/assets/images/inside-monte-carlo-05.jpg",
     title: "Une porte habituellement fermée",
   },
   {
@@ -57,6 +61,7 @@ export const editorialCards: EditorialCard[] = [
     description:
       "Portrait à venir de celles et ceux dont le savoir-faire donne forme au temps.",
     href: "/les-gardiens-du-geste",
+    image: "/assets/images/inside-monte-carlo-14.jpg",
     title: "Dans l’atelier, le temps du geste",
   },
   {
@@ -65,6 +70,7 @@ export const editorialCards: EditorialCard[] = [
     description:
       "Une immersion temporaire dans les lieux, les métiers et les détails rarement visibles.",
     href: "/les-coulisses",
+    image: "/assets/images/inside-monte-carlo-17.jpg",
     title: "Avant que les portes ne s’ouvrent",
   },
   {
@@ -73,6 +79,7 @@ export const editorialCards: EditorialCard[] = [
     description:
       "Une sélection éditoriale à venir pour vivre la Principauté autrement.",
     href: "/experiences",
+    image: "/assets/images/inside-monte-carlo-23.jpg",
     title: "Monaco, loin du premier regard",
   },
   {
@@ -81,6 +88,7 @@ export const editorialCards: EditorialCard[] = [
     description:
       "Une conversation à venir, enregistrée au plus près d’une voix monégasque.",
     href: "/podcasts",
+    image: "/assets/images/inside-monte-carlo-24.jpg",
     title: "La voix derrière le lieu",
   },
 ];
@@ -88,6 +96,7 @@ export const editorialCards: EditorialCard[] = [
 export const sectionPages: SectionPage[] = [
   {
     eyebrow: "Édition 01 · Prochainement",
+    image: "/assets/images/inside-monte-carlo-17.jpg",
     intro:
       "Le magazine rassemble des récits, des portraits et des regards consacrés à Monaco, sans céder au bruit ni à l’évidence.",
     paragraphs: [
@@ -99,6 +108,7 @@ export const sectionPages: SectionPage[] = [
   },
   {
     eyebrow: "Accès · Prochainement",
+    image: "/assets/images/inside-monte-carlo-23.jpg",
     intro:
       "La Clé Monte-Carlo ouvre des portes habituellement fermées et révèle des lieux à travers celles et ceux qui les font vivre.",
     paragraphs: [
@@ -110,6 +120,7 @@ export const sectionPages: SectionPage[] = [
   },
   {
     eyebrow: "Portraits · Prochainement",
+    image: "/assets/images/inside-monte-carlo-14.jpg",
     intro:
       "Les Gardiens du Geste donnent la parole aux artisans, créateurs et dépositaires de savoir-faire qui façonnent Monaco.",
     paragraphs: [
@@ -121,6 +132,7 @@ export const sectionPages: SectionPage[] = [
   },
   {
     eyebrow: "Immersion · Prochainement",
+    image: "/assets/images/inside-monte-carlo-05.jpg",
     intro:
       "Les Coulisses regardent ce qui précède l’apparition publique : la préparation, la précision et le travail invisible.",
     paragraphs: [
@@ -132,6 +144,7 @@ export const sectionPages: SectionPage[] = [
   },
   {
     eyebrow: "Sélection · Prochainement",
+    image: "/assets/images/inside-monte-carlo-24.jpg",
     intro:
       "Expériences propose une lecture éditoriale des lieux et des instants qui méritent d’être vécus avec attention.",
     paragraphs: [
@@ -143,6 +156,7 @@ export const sectionPages: SectionPage[] = [
   },
   {
     eyebrow: "Écouter · Prochainement",
+    image: "/assets/images/inside-monte-carlo-26.jpg",
     intro:
       "Les podcasts prolongent les récits d’Inside Monte-Carlo dans un format de conversation et d’écoute.",
     paragraphs: [
@@ -154,6 +168,7 @@ export const sectionPages: SectionPage[] = [
   },
   {
     eyebrow: "Agenda · Prochainement",
+    image: "/assets/images/inside-monte-carlo-03.jpg",
     intro:
       "Événements accueillera une sélection resserrée de rendez-vous culturels et éditoriaux liés à la Principauté.",
     paragraphs: [
@@ -165,6 +180,7 @@ export const sectionPages: SectionPage[] = [
   },
   {
     eyebrow: "Le média",
+    image: "/assets/images/inside-monte-carlo-27.jpg",
     intro:
       "Inside Monte-Carlo est un magazine digital consacré aux histoires que Monaco ne raconte pas.",
     paragraphs: [
@@ -176,6 +192,7 @@ export const sectionPages: SectionPage[] = [
   },
   {
     eyebrow: "Correspondance",
+    image: "/assets/images/inside-monte-carlo-25.jpg",
     intro:
       "La newsletter rassemblera les nouveaux récits, portraits et invitations d’Inside Monte-Carlo.",
     paragraphs: [

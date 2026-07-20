@@ -51,11 +51,16 @@ export default async function SectionPage({ params }: SectionPageProps) {
             <span className="eyebrow eyebrow--light">{section.eyebrow}</span>
             <h1>{section.title}</h1>
           </div>
-          <div className="section-page__image">
-            <span className="asset-placeholder asset-placeholder--light">IMAGE À VENIR</span>
+          <div className="section-page__image" data-reveal>
+            <span
+              aria-hidden="true"
+              className="asset-placeholder asset-placeholder--light"
+              data-asset="IMAGE À VENIR"
+              style={{ backgroundImage: `url(${section.image})` }}
+            />
           </div>
         </header>
-        <article className="article-layout">
+        <article className="article-layout" data-reveal>
           <aside>
             <span>Inside Monte-Carlo</span>
             <span>Lecture · 02 min</span>
