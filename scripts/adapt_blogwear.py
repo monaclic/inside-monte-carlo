@@ -165,7 +165,8 @@ def adapt_logos_and_images(soup: BeautifulSoup, config: dict) -> None:
 
     menu_image = soup.select_one("img.menu-image")
     if menu_image:
-        set_image(menu_image, asset_path(image_config["menu"]), brand["name"])
+        menu_source = image_config.get("menu_background") or asset_path(image_config["menu"])
+        set_image(menu_image, menu_source, "Texture papier Inside Monte-Carlo")
 
     search_image = soup.select_one("img.image-search")
     if search_image:
