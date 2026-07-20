@@ -161,7 +161,7 @@ def adapt_logos_and_images(soup: BeautifulSoup, config: dict) -> None:
     hero_image = soup.select_one("img.image-content.hero")
     if hero_image:
         hero_source = image_config.get("hero_background") or asset_path(image_config["hero"])
-        set_image(hero_image, hero_source, "Casino de Monte-Carlo de nuit")
+        set_image(hero_image, hero_source, "Univers éditorial Inside Monte-Carlo")
 
     menu_image = soup.select_one("img.menu-image")
     if menu_image:
