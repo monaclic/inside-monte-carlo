@@ -1,66 +1,131 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import { ArticleCard } from "@/components/article-card";
+import { Newsletter } from "@/components/newsletter";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { editorialCards } from "@/data/content";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <>
+      <SiteHeader />
+      <main>
+        <section className="hero" aria-labelledby="hero-title">
+          <div className="hero__media">
+            <video
+              aria-label="Emplacement réservé à la vidéo de présentation"
+              muted
+              playsInline
+              poster="/assets/images/placeholder.svg"
             />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            <div className="hero__overlay">
+              <span className="eyebrow eyebrow--light">Le média de la Principauté</span>
+              <h1 id="hero-title">Inside Monte-Carlo</h1>
+              <a className="scroll-cue" href="#magazine">
+                <span aria-hidden="true">↓</span>
+                Découvrir
+              </a>
+            </div>
+          </div>
+          <div className="hero__editorial">
+            <div className="hero__monogram" aria-hidden="true">
+              <span>I</span>
+              <span>M</span>
+              <span>C</span>
+            </div>
+            <div className="hero__copy">
+              <p>Les histoires que Monaco ne raconte pas.</p>
+              <Link className="button" href="/magazine">
+                Découvrir
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="editorial-section" id="magazine">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">Derniers récits</span>
+              <h2>Magazine</h2>
+            </div>
+            <Link className="text-link" href="/magazine">
+              Tous les articles <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <div className="article-grid">
+            {editorialCards.slice(0, 5).map((article, index) => (
+              <ArticleCard article={article} featured={index === 0} key={article.title} />
+            ))}
+          </div>
+        </section>
+
+        <section className="key-feature">
+          <div className="key-feature__media">
+            <span className="asset-placeholder asset-placeholder--light">IMAGE 07</span>
+          </div>
+          <div className="key-feature__content">
+            <span className="eyebrow eyebrow--light">Accès exclusif</span>
+            <h2>La Clé<br />Monte-Carlo</h2>
+            <p>
+              Des lieux, des rencontres et des histoires dévoilés avec retenue, au-delà des
+              apparences.
+            </p>
+            <Link className="button button--light" href="/la-cle-monte-carlo">
+              Ouvrir la porte
+            </Link>
+          </div>
+        </section>
+
+        <section className="guardians editorial-section">
+          <div className="section-heading section-heading--centered">
+            <div>
+              <span className="eyebrow">Portraits</span>
+              <h2>Les Gardiens du Geste</h2>
+            </div>
+            <p>
+              Celles et ceux qui perpétuent un savoir-faire, une précision et une manière de
+              faire.
+            </p>
+          </div>
+          <div className="guardian-grid">
+            {["IMAGE 08", "IMAGE 09", "IMAGE 10"].map((asset, index) => (
+              <Link className="guardian-card" href="/les-gardiens-du-geste" key={asset}>
+                <span className="asset-placeholder">{asset}</span>
+                <span className="guardian-card__index">0{index + 1}</span>
+                <h3>{["Le trait", "La matière", "Le temps"][index]}</h3>
+                <p>Portrait éditorial à venir.</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="experiences editorial-section">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">Sélection</span>
+              <h2>Expériences</h2>
+            </div>
+            <Link className="text-link" href="/experiences">
+              Explorer <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <div className="experience-grid">
+            <div className="experience-grid__lead">
+              <span className="asset-placeholder asset-placeholder--dark">IMAGE 11</span>
+              <div>
+                <span>Expérience · Prochainement</span>
+                <h3>Monaco, loin du premier regard</h3>
+              </div>
+            </div>
+            {editorialCards.slice(3, 6).map((article) => (
+              <ArticleCard article={article} key={article.title} />
+            ))}
+          </div>
+        </section>
+
+        <Newsletter />
       </main>
-    </div>
+      <SiteFooter />
+    </>
   );
 }
