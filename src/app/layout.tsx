@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Judson, Noto_Sans } from "next/font/google";
-import { MotionLayer } from "@/components/motion-layer";
 import "./globals.css";
 
 const judson = Judson({
@@ -35,22 +34,33 @@ export const metadata: Metadata = {
     title: "Inside Monte-Carlo",
     description: "Les histoires que Monaco ne raconte pas.",
     url: "/",
+    images: ["/assets/images/inside-monte-carlo-24.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Inside Monte-Carlo",
     description: "Les histoires que Monaco ne raconte pas.",
+    images: ["/assets/images/inside-monte-carlo-24.jpg"],
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={`${judson.variable} ${notoSans.variable} ${inter.variable}`}>
+    <html
+      lang="fr"
+      data-wf-domain="inside-monte-carlo.vercel.app"
+      data-wf-site="66cc288225154d2a15304039"
+      className={`w-mod-js ${judson.variable} ${notoSans.variable} ${inter.variable}`}
+    >
+      <head>
+        {/* Le fichier CSS Webflow est un asset public tiers, chargé tel quel. */}
+        {/* eslint-disable-next-line @next/next/no-css-tags */}
+        <link rel="stylesheet" href="/assets/css/blogwear.css" />
+      </head>
       <body>
         <noscript>
-          <style>{`.preloader{display:none!important}`}</style>
+          <style>{`.preloader,.preloader-mobile{display:none!important}`}</style>
         </noscript>
-        <MotionLayer />
         {children}
       </body>
     </html>

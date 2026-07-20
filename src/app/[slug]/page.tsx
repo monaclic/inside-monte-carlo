@@ -1,10 +1,15 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Newsletter } from "@/components/newsletter";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { WebflowRuntime } from "@/components/webflow-runtime";
 import { getSectionPage, sectionPages } from "@/data/content";
+
+const ARTICLE_PAGE_ID = "66cc44585d9587bf6b8b2aff";
+const articleTemplate = readFileSync(
+  path.join(process.cwd(), "src/content/blogwear-article.html"),
+  "utf8",
+);
 
 type SectionPageProps = {
   params: Promise<{ slug: string }>;
@@ -30,8 +35,18 @@ export async function generateMetadata({ params }: SectionPageProps): Promise<Me
     openGraph: {
       title: `${section.title} | Inside Monte-Carlo`,
       description: section.intro,
+      images: [section.image],
     },
   };
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 export default async function SectionPage({ params }: SectionPageProps) {
@@ -42,43 +57,23 @@ export default async function SectionPage({ params }: SectionPageProps) {
     notFound();
   }
 
+  const firstParagraph = section.paragraphs[0] ?? section.intro;
+  const secondParagraph = section.paragraphs[1] ?? firstParagraph;
+  const markup = articleTemplate
+    .replaceAll("{{TITLE}}", escapeHtml(section.title))
+    .replaceAll("{{INTRO}}", escapeHtml(section.intro))
+    .replaceAll("{{PARAGRAPH_ONE}}", escapeHtml(firstParagraph))
+    .replaceAll("{{PARAGRAPH_TWO}}", escapeHtml(secondParagraph))
+    .replaceAll("/assets/images/inside-monte-carlo-04.jpg", section.image)
+    .replaceAll("/assets/images/inside-monte-carlo-05.jpg", section.image);
+
   return (
     <>
-      <SiteHeader />
-      <main className="section-page">
-        <header className="section-page__hero">
-          <div className="section-page__title">
-            <span className="eyebrow eyebrow--light">{section.eyebrow}</span>
-            <h1>{section.title}</h1>
-          </div>
-          <div className="section-page__image" data-reveal>
-            <span
-              aria-hidden="true"
-              className="asset-placeholder asset-placeholder--light"
-              data-asset="IMAGE À VENIR"
-              style={{ backgroundImage: `url(${section.image})` }}
-            />
-          </div>
-        </header>
-        <article className="article-layout" data-reveal>
-          <aside>
-            <span>Inside Monte-Carlo</span>
-            <span>Lecture · 02 min</span>
-          </aside>
-          <div className="article-layout__body">
-            <p className="article-layout__lead">{section.intro}</p>
-            {section.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-            <blockquote>Les histoires que Monaco ne raconte pas.</blockquote>
-            <Link className="button" href="/magazine">
-              Revenir au magazine
-            </Link>
-          </div>
-        </article>
-        <Newsletter />
-      </main>
-      <SiteFooter />
+      <WebflowRuntime pageId={ARTICLE_PAGE_ID} />
+      <div
+        className="webflow-page-host"
+        dangerouslySetInnerHTML={{ __html: markup }}
+      />
     </>
   );
 }

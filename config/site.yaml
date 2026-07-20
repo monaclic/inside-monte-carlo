@@ -1,0 +1,59 @@
+template:
+  home_url: https://blogwear.webflow.io/
+  article_url: https://blogwear.webflow.io/articles/how-to-choose-the-perfect-fragrance-for-every-occasion-and-season
+  home_output: src/content/blogwear-home.html
+  article_output: src/content/blogwear-article.html
+
+brand:
+  name: Inside Monte-Carlo
+  tagline: Les histoires que Monaco ne raconte pas.
+  logo_black: /assets/images/inside-logo-black.svg
+  logo_white: /assets/images/inside-logo-white.svg
+  hero_logo: /assets/images/inside-logo-hero.svg
+
+navigation:
+  - { label: Accueil, href: / }
+  - { label: Magazine, href: /magazine }
+  - { label: La Clé Monte-Carlo, href: /la-cle-monte-carlo }
+  - { label: Les Gardiens du Geste, href: /les-gardiens-du-geste }
+  - { label: Les Coulisses, href: /les-coulisses }
+  - { label: Expériences, href: /experiences }
+  - { label: Podcasts, href: /podcasts }
+  - { label: Événements, href: /evenements }
+  - { label: À propos, href: /a-propos }
+  - { label: Newsletter, href: /newsletter }
+
+quick_navigation:
+  - { label: Magazine, href: /magazine }
+  - { label: La Clé, href: /la-cle-monte-carlo }
+  - { label: Les Gardiens, href: /les-gardiens-du-geste }
+  - { label: Expériences, href: /experiences }
+
+images:
+  preloader: [5, 14, 17, 24, 1, 2, 3, 4]
+  hero: 24
+  menu: 23
+  search: 17
+  content: [6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 18, 19, 20, 21, 22, 25, 26, 27]
+
+template_asset_replacements:
+  66cc5739e71c20a41c7e3e7e_Vector.svg: /assets/images/template/menu-round.svg
+  66cc59698ea1f29e16073751_Vector.svg: /assets/images/template/menu-lines.svg
+  66d30545b47f498250f54d7f_Close%20Button.svg: /assets/images/template/close.svg
+  66e19bfe1c993e22bfcfea40_Scroll%20Down%20New.svg: /assets/images/template/scroll-down.svg
+  66cdc3ca469dbe9e57e41323_Glued%20Paper%202.webp: /assets/images/template/glued-paper.webp
+
+temporary_titles:
+  - Le Rocher, à l’heure silencieuse
+  - Une porte habituellement fermée
+  - Dans l’atelier, le temps du geste
+  - Avant que les portes ne s’ouvrent
+  - Monaco, loin du premier regard
+  - La voix derrière le lieu
+  - La matière et le temps
+  - Une lumière sur la Principauté
+
+text:
+  temporary_description: Un récit éditorial à venir. Le contenu définitif sera intégré après validation.
+  hero_cta: Découvrir
+  newsletter_title: Recevoir les prochains récits d’Inside Monte-Carlo
