@@ -128,8 +128,21 @@ def adapt_logos_and_images(soup: BeautifulSoup, config: dict) -> None:
         set_image(logo, brand["logo_black"], brand["name"])
     for logo in soup.select("img.preloader-logo, .logo-wrapper-footer img"):
         set_image(logo, brand["logo_white"], brand["name"])
-    for logo in soup.select("img.logo-wrapper-hero"):
-        set_image(logo, brand["hero_logo"], brand["name"])
+    for logo in list(soup.select("img.logo-wrapper-hero")):
+        monogram = soup.new_tag(
+            "div",
+            attrs={
+                "class": "logo-wrapper-hero inside-hero-letters",
+                "aria-label": brand["name"],
+                "role": "img",
+            },
+        )
+        first_letters = soup.new_tag("span")
+        first_letters.string = "IM"
+        final_letter = soup.new_tag("span", attrs={"class": "inside-hero-letter-gold"})
+        final_letter.string = "C"
+        monogram.extend([first_letters, final_letter])
+        logo.replace_with(monogram)
     for logo in soup.find_all("img", src=True):
         if "66d1af205d59d33f46dd0769_Logo.svg" in logo["src"]:
             set_image(logo, brand["logo_black"], brand["name"])

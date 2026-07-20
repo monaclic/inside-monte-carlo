@@ -63,6 +63,29 @@ input,
   width: 13rem;
 }
 
+.inside-hero-letters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.03em;
+  background: var(--inside-cream);
+  color: var(--inside-black);
+  font-family: var(--font-interface), Arial, sans-serif;
+  font-size: clamp(7rem, 15vw, 16rem);
+  font-weight: 800;
+  letter-spacing: -0.1em;
+  line-height: 1;
+}
+
+.inside-hero-letter-gold {
+  color: var(--inside-gold);
+}
+
+.menu-text-style {
+  font-size: clamp(2.5rem, 4.2vw, 4.8rem) !important;
+  line-height: 1 !important;
+}
+
 .w-commerce-commercecartwrapper,
 .w-webflow-badge,
 .buy-badge {
@@ -73,11 +96,19 @@ input,
   .page-wrapper-home {
     opacity: 1 !important;
   }
+
+  .menu-text-style {
+    font-size: clamp(2.25rem, 7vw, 4rem) !important;
+  }
 }
 
 @media (max-width: 479px) {
   .nav-logo {
     width: 7rem !important;
     height: 2.5rem !important;
+  }
+
+  .inside-hero-letters {
+    font-size: clamp(6rem, 31vw, 9rem);
   }
 }
