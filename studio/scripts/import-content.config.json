@@ -1,0 +1,6 @@
+{
+  "assetRoot": "../../public",
+  "logFile": "../../data/logs/sanity-import.log",
+  "homePageId": "homePage",
+  "homeHeroImage": "/assets/images/inside-monte-carlo-hero.webp"
+}
