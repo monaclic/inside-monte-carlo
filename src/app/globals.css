@@ -4,6 +4,18 @@
   --inside-gold: #c6ab71;
 }
 
+/* Le contenu reste accessible même si le moteur Webflow tarde ou échoue. */
+.page-wrapper,
+.page-wrapper-home {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.preloader,
+.preloader-mobile {
+  display: none !important;
+}
+
 html,
 body {
   background: var(--inside-cream);
