@@ -99,7 +99,10 @@ export default async function SectionPage({ params }: SectionPageProps) {
     : fallbackSection?.paragraphs ?? [];
   const firstParagraph = paragraphs[0] ?? section.intro;
   const secondParagraph = paragraphs[1] ?? firstParagraph;
-  const image = sanitySection?.imageUrl ?? fallbackSection?.image;
+  const image =
+    sanitySection?.linkedArticleImageUrl ??
+    sanitySection?.imageUrl ??
+    fallbackSection?.image;
   const contentImage = sanitySection?.contentImageUrl ?? image;
   const markup = articleTemplate
     .replaceAll("{{TITLE}}", escapeHtml(section.title))
