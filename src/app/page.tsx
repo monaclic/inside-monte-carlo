@@ -14,6 +14,15 @@ const homeMarkup = readFileSync(
   "utf8",
 );
 
+const featuredImageSlots = [
+  ["/assets/images/inside-monte-carlo-06.jpg", "/assets/images/inside-monte-carlo-16.jpg"],
+  ["/assets/images/inside-monte-carlo-07.jpg", "/assets/images/inside-monte-carlo-18.jpg"],
+  ["/assets/images/inside-monte-carlo-08.jpg", "/assets/images/inside-monte-carlo-19.jpg"],
+  ["/assets/images/inside-monte-carlo-09.jpg", "/assets/images/inside-monte-carlo-20.jpg"],
+  ["/assets/images/inside-monte-carlo-10.jpg", "/assets/images/inside-monte-carlo-21.jpg"],
+  ["/assets/images/inside-monte-carlo-12.jpg", "/assets/images/inside-monte-carlo-22.jpg"],
+];
+
 function escapeHtml(value: string) {
   return value
     .replaceAll("&", "&amp;")
@@ -53,7 +62,11 @@ async function getHomeMarkup() {
         .replaceAll(`href="${previous.href}"`, `href="${escapeHtml(story.href)}"`);
 
       if (story.imageUrl) {
-        markup = markup.replaceAll(previous.image, escapeHtml(story.imageUrl));
+        const imageUrl = escapeHtml(story.imageUrl);
+        const imageSlots = [previous.image, ...(featuredImageSlots[index] ?? [])];
+        imageSlots.forEach((imageSlot) => {
+          markup = markup.replaceAll(imageSlot, imageUrl);
+        });
       }
     });
 
