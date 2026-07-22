@@ -9,6 +9,26 @@ const RUNTIME_SCRIPTS = [
   ["inside-webflow", "/assets/js/webflow.js"],
 ] as const;
 
+type WebflowApi = {
+  destroy?: () => void;
+  ready?: () => void;
+};
+
+function revealPage() {
+  document
+    .querySelectorAll<HTMLElement>(".page-wrapper, .page-wrapper-home")
+    .forEach((page) => {
+      page.style.opacity = "1";
+      page.style.removeProperty("transform");
+    });
+
+  document
+    .querySelectorAll<HTMLElement>(".preloader, .preloader-mobile")
+    .forEach((preloader) => {
+      preloader.style.display = "none";
+    });
+}
+
 function loadScript(id: string, source: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const existing = document.getElementById(id) as HTMLScriptElement | null;
@@ -47,6 +67,7 @@ export function WebflowRuntime({ pageId }: { pageId: string }) {
 
     const runtimeWindow = window as typeof window & {
       __WEBFLOW_CURRENCY_SETTINGS?: Record<string, unknown>;
+      Webflow?: WebflowApi;
     };
     runtimeWindow.__WEBFLOW_CURRENCY_SETTINGS = {
       currencyCode: "EUR",
@@ -59,14 +80,32 @@ export function WebflowRuntime({ pageId }: { pageId: string }) {
     };
 
     let active = true;
+    const scriptsWereLoaded = RUNTIME_SCRIPTS.every(
+      ([id]) =>
+        (document.getElementById(id) as HTMLScriptElement | null)?.dataset.loaded ===
+        "true",
+    );
+
+    if (scriptsWereLoaded) {
+      revealPage();
+    }
+
+    const safetyTimer = window.setTimeout(revealPage, scriptsWereLoaded ? 1500 : 5000);
+
     const startWebflow = async () => {
       try {
         for (const [id, source] of RUNTIME_SCRIPTS) {
           await loadScript(id, source);
         }
+
+        if (scriptsWereLoaded && active) {
+          runtimeWindow.Webflow?.destroy?.();
+          runtimeWindow.Webflow?.ready?.();
+        }
       } catch (error) {
         if (active) {
           console.error("Le moteur d'animations Webflow n'a pas pu démarrer.", error);
+          revealPage();
         }
       }
     };
@@ -74,6 +113,7 @@ export function WebflowRuntime({ pageId }: { pageId: string }) {
     void startWebflow();
     return () => {
       active = false;
+      window.clearTimeout(safetyTimer);
     };
   }, [pageId]);
 
