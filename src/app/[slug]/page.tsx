@@ -103,14 +103,17 @@ export default async function SectionPage({ params }: SectionPageProps) {
     sanitySection?.linkedArticleImageUrl ??
     sanitySection?.imageUrl ??
     fallbackSection?.image;
-  const contentImage = sanitySection?.contentImageUrl ?? image;
+  const contentImage =
+    sanitySection?.linkedArticleImageUrl ??
+    sanitySection?.contentImageUrl ??
+    image;
   const markup = articleTemplate
     .replaceAll("{{TITLE}}", escapeHtml(section.title))
     .replaceAll("{{INTRO}}", escapeHtml(section.intro))
     .replaceAll("{{PARAGRAPH_ONE}}", escapeHtml(firstParagraph))
     .replaceAll("{{PARAGRAPH_TWO}}", escapeHtml(secondParagraph))
-    .replaceAll("/assets/images/inside-monte-carlo-04.jpg", image ?? "")
-    .replaceAll("/assets/images/inside-monte-carlo-05.jpg", contentImage ?? "");
+    .replaceAll("/assets/images/inside-monte-carlo-06.jpg", image ?? "")
+    .replaceAll("/assets/images/inside-monte-carlo-07.jpg", contentImage ?? "");
 
   return (
     <>
