@@ -38,6 +38,7 @@ export const SECTION_PAGE_QUERY = defineQuery(`
     intro,
     "slug": slug.current,
     "imageUrl": image.asset->url,
+    "contentImageUrl": contentImage.asset->url,
     body,
     seo
   }
@@ -93,6 +94,7 @@ export type SanitySectionPage = {
   intro: string
   slug: string
   imageUrl?: string
+  contentImageUrl?: string
   body?: PortableTextBlock[]
   seo?: {title?: string; description?: string}
 }

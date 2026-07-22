@@ -1,0 +1,15 @@
+{
+  "assetRoot": "../../public/assets/images",
+  "logFile": "../../data/logs/sanity-section-images.log",
+  "contentImages": {
+    "magazine": "inside-monte-carlo-18.jpg",
+    "la-cle-monte-carlo": "inside-monte-carlo-12.jpg",
+    "les-gardiens-du-geste": "inside-monte-carlo-11.jpg",
+    "les-coulisses": "inside-monte-carlo-06.jpg",
+    "experiences": "inside-monte-carlo-22.jpg",
+    "podcasts": "inside-monte-carlo-24.jpg",
+    "evenements": "inside-monte-carlo-02.jpg",
+    "a-propos": "inside-monte-carlo-25.jpg",
+    "newsletter": "inside-monte-carlo-27.jpg"
+  }
+}

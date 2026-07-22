@@ -36,6 +36,14 @@ export const sectionPage = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'contentImage',
+      title: "Image dans l'article",
+      description: "Cette image apparaît plus bas dans la page. Choisissez une photo différente de l'image principale.",
+      type: 'image',
+      options: {hotspot: true},
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'body',
       title: 'Contenu',
       type: 'array',

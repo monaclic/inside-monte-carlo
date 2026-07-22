@@ -100,13 +100,14 @@ export default async function SectionPage({ params }: SectionPageProps) {
   const firstParagraph = paragraphs[0] ?? section.intro;
   const secondParagraph = paragraphs[1] ?? firstParagraph;
   const image = sanitySection?.imageUrl ?? fallbackSection?.image;
+  const contentImage = sanitySection?.contentImageUrl ?? image;
   const markup = articleTemplate
     .replaceAll("{{TITLE}}", escapeHtml(section.title))
     .replaceAll("{{INTRO}}", escapeHtml(section.intro))
     .replaceAll("{{PARAGRAPH_ONE}}", escapeHtml(firstParagraph))
     .replaceAll("{{PARAGRAPH_TWO}}", escapeHtml(secondParagraph))
     .replaceAll("/assets/images/inside-monte-carlo-04.jpg", image ?? "")
-    .replaceAll("/assets/images/inside-monte-carlo-05.jpg", image ?? "");
+    .replaceAll("/assets/images/inside-monte-carlo-05.jpg", contentImage ?? "");
 
   return (
     <>
