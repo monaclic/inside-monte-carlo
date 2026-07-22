@@ -1,0 +1,35 @@
+{
+  "logFile": "../../data/logs/sanity-home-images.log",
+  "assetRoot": "../../public/assets/images",
+  "defaultArticleDescription": "Un récit éditorial à venir. Le contenu définitif sera intégré après validation.",
+  "articleTitles": {
+    "magazine": [
+      "Le Rocher, à l’heure silencieuse",
+      "Une porte habituellement fermée",
+      "Dans l’atelier, le temps du geste",
+      "Avant que les portes ne s’ouvrent",
+      "Monaco, loin du premier regard"
+    ],
+    "key": [
+      "La voix derrière le lieu",
+      "La matière et le temps",
+      "Une lumière sur la Principauté",
+      "Le Rocher, à l’heure silencieuse"
+    ],
+    "experiences": [
+      "Une porte habituellement fermée",
+      "Dans l’atelier, le temps du geste",
+      "Avant que les portes ne s’ouvrent",
+      "Monaco, loin du premier regard",
+      "La voix derrière le lieu"
+    ]
+  },
+  "staticImages": {
+    "guardians": "inside-monte-carlo-11.jpg",
+    "keySecond": "inside-monte-carlo-13.jpg",
+    "keyThird": "inside-monte-carlo-15.jpg",
+    "premiumFirst": "inside-monte-carlo-25.jpg",
+    "premiumSecond": "inside-monte-carlo-26.jpg",
+    "premiumThird": "inside-monte-carlo-27.jpg"
+  }
+}

@@ -11,6 +11,14 @@ export const HOME_PAGE_QUERY = defineQuery(`
   *[_type == "homePage"][0]{
     _id,
     "heroImageUrl": heroImage.asset->url,
+    magazineImages[]{_key, "url": asset->url},
+    magazineArticles[]{_key, title, description, "imageUrl": image.asset->url},
+    "guardiansImageUrl": guardiansImage.asset->url,
+    keyImages[]{_key, "url": asset->url},
+    keyArticles[]{_key, title, description, "imageUrl": image.asset->url},
+    experiencesImages[]{_key, "url": asset->url},
+    experiencesArticles[]{_key, title, description, "imageUrl": image.asset->url},
+    premiumImages[]{_key, "url": asset->url},
     featuredStories[]{
       _key,
       category,
@@ -42,6 +50,14 @@ export const SECTION_SLUGS_QUERY = defineQuery(`
 export type SanityHomePage = {
   _id: string
   heroImageUrl?: string
+  magazineImages?: SanityImage[]
+  magazineArticles?: SanityHomeArticle[]
+  guardiansImageUrl?: string
+  keyImages?: SanityImage[]
+  keyArticles?: SanityHomeArticle[]
+  experiencesImages?: SanityImage[]
+  experiencesArticles?: SanityHomeArticle[]
+  premiumImages?: SanityImage[]
   featuredStories?: Array<{
     _key: string
     category: string
@@ -50,6 +66,18 @@ export type SanityHomePage = {
     href: string
     imageUrl?: string
   }>
+}
+
+type SanityImage = {
+  _key: string
+  url?: string
+}
+
+type SanityHomeArticle = {
+  _key: string
+  title: string
+  description?: string
+  imageUrl?: string
 }
 
 type PortableTextBlock = {

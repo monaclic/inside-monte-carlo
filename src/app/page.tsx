@@ -14,15 +14,6 @@ const homeMarkup = readFileSync(
   "utf8",
 );
 
-const featuredImageSlots = [
-  ["/assets/images/inside-monte-carlo-06.jpg", "/assets/images/inside-monte-carlo-16.jpg"],
-  ["/assets/images/inside-monte-carlo-07.jpg", "/assets/images/inside-monte-carlo-18.jpg"],
-  ["/assets/images/inside-monte-carlo-08.jpg", "/assets/images/inside-monte-carlo-19.jpg"],
-  ["/assets/images/inside-monte-carlo-09.jpg", "/assets/images/inside-monte-carlo-20.jpg"],
-  ["/assets/images/inside-monte-carlo-10.jpg", "/assets/images/inside-monte-carlo-21.jpg"],
-  ["/assets/images/inside-monte-carlo-12.jpg", "/assets/images/inside-monte-carlo-22.jpg"],
-];
-
 function escapeHtml(value: string) {
   return value
     .replaceAll("&", "&amp;")
@@ -30,6 +21,19 @@ function escapeHtml(value: string) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function replaceImageOccurrences(
+  markup: string,
+  source: string,
+  replacements: Array<string | undefined>,
+) {
+  let occurrence = 0;
+  return markup.replaceAll(source, () => {
+    const replacement = replacements[occurrence];
+    occurrence += 1;
+    return replacement ? escapeHtml(replacement) : source;
+  });
 }
 
 async function getHomeMarkup() {
@@ -51,6 +55,70 @@ async function getHomeMarkup() {
       );
     }
 
+
+    const featuredImages = home.featuredStories?.map((story) => story.imageUrl) ?? [];
+    const magazine = home.magazineArticles?.length
+      ? home.magazineArticles.map((article) => article.imageUrl)
+      : home.magazineImages?.map((image) => image.url) ?? [];
+    const key = home.keyArticles?.length
+      ? home.keyArticles.map((article) => article.imageUrl)
+      : home.keyImages?.map((image) => image.url) ?? [];
+    const experiences = home.experiencesArticles?.length
+      ? home.experiencesArticles.map((article) => article.imageUrl)
+      : home.experiencesImages?.map((image) => image.url) ?? [];
+    const premium = home.premiumImages?.map((image) => image.url) ?? [];
+
+    const imageSlots: Array<[string, Array<string | undefined>]> = [
+      ["/assets/images/inside-monte-carlo-06.jpg", [magazine[0] ?? featuredImages[0], premium[3] ?? featuredImages[0]]],
+      ["/assets/images/inside-monte-carlo-07.jpg", [magazine[1] ?? featuredImages[1], premium[4] ?? featuredImages[1]]],
+      ["/assets/images/inside-monte-carlo-08.jpg", [magazine[2] ?? featuredImages[2]]],
+      ["/assets/images/inside-monte-carlo-09.jpg", [magazine[3] ?? featuredImages[3]]],
+      ["/assets/images/inside-monte-carlo-10.jpg", [magazine[4] ?? featuredImages[4]]],
+      ["/assets/images/inside-monte-carlo-11.jpg", [home.guardiansImageUrl]],
+      ["/assets/images/inside-monte-carlo-12.jpg", [key[0] ?? featuredImages[5]]],
+      ["/assets/images/inside-monte-carlo-13.jpg", [key[1]]],
+      ["/assets/images/inside-monte-carlo-15.jpg", [key[2]]],
+      ["/assets/images/inside-monte-carlo-16.jpg", [key[3] ?? featuredImages[0]]],
+      ["/assets/images/inside-monte-carlo-18.jpg", [experiences[0] ?? featuredImages[1]]],
+      ["/assets/images/inside-monte-carlo-19.jpg", [experiences[1] ?? featuredImages[2]]],
+      ["/assets/images/inside-monte-carlo-20.jpg", [experiences[2] ?? featuredImages[3]]],
+      ["/assets/images/inside-monte-carlo-21.jpg", [experiences[3] ?? featuredImages[4]]],
+      ["/assets/images/inside-monte-carlo-22.jpg", [experiences[4] ?? featuredImages[5]]],
+      ["/assets/images/inside-monte-carlo-25.jpg", [premium[0]]],
+      ["/assets/images/inside-monte-carlo-26.jpg", [premium[1]]],
+      ["/assets/images/inside-monte-carlo-27.jpg", [premium[2]]],
+    ];
+
+    imageSlots.forEach(([source, replacements]) => {
+      markup = replaceImageOccurrences(markup, source, replacements);
+    });
+
+    const magazineArticles = home.magazineArticles ?? [];
+    const keyArticles = home.keyArticles ?? [];
+    const experiencesArticles = home.experiencesArticles ?? [];
+    const titleSlots: Array<[string, Array<string | undefined>]> = [
+      ["Le Rocher, à l’heure silencieuse", [magazineArticles[0]?.title, keyArticles[3]?.title]],
+      ["Une porte habituellement fermée", [magazineArticles[1]?.title, experiencesArticles[0]?.title]],
+      ["Dans l’atelier, le temps du geste", [magazineArticles[2]?.title, experiencesArticles[1]?.title]],
+      ["Avant que les portes ne s’ouvrent", [magazineArticles[3]?.title, experiencesArticles[2]?.title]],
+      ["Monaco, loin du premier regard", [magazineArticles[4]?.title, experiencesArticles[3]?.title]],
+      ["La voix derrière le lieu", [keyArticles[0]?.title, experiencesArticles[4]?.title]],
+      ["La matière et le temps", [keyArticles[1]?.title]],
+      ["Une lumière sur la Principauté", [keyArticles[2]?.title]],
+    ];
+    titleSlots.forEach(([source, replacements]) => {
+      markup = replaceImageOccurrences(markup, source, replacements);
+    });
+
+    const articleDescriptions = [...magazineArticles, ...experiencesArticles].map(
+      (article) => article.description,
+    );
+    markup = replaceImageOccurrences(
+      markup,
+      "Un récit éditorial à venir. Le contenu définitif sera intégré après validation.",
+      articleDescriptions,
+    );
+
     home.featuredStories?.forEach((story, index) => {
       const previous = editorialCards[index];
       if (!previous) return;
@@ -63,10 +131,7 @@ async function getHomeMarkup() {
 
       if (story.imageUrl) {
         const imageUrl = escapeHtml(story.imageUrl);
-        const imageSlots = [previous.image, ...(featuredImageSlots[index] ?? [])];
-        imageSlots.forEach((imageSlot) => {
-          markup = markup.replaceAll(imageSlot, imageUrl);
-        });
+        markup = markup.replaceAll(previous.image, imageUrl);
       }
     });
 
