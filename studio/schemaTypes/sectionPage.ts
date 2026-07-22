@@ -41,7 +41,7 @@ export const sectionPage = defineType({
       description: "Cette image apparaît plus bas dans la page. Choisissez une photo différente de l'image principale.",
       type: 'image',
       options: {hotspot: true},
-      validation: (rule) => rule.required(),
+      hidden: true,
     }),
     defineField({
       name: 'body',

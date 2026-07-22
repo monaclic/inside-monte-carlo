@@ -39,9 +39,14 @@ export const SECTION_PAGE_QUERY = defineQuery(`
     "slug": slug.current,
     "imageUrl": image.asset->url,
     "contentImageUrl": contentImage.asset->url,
-    "linkedArticleImageUrl": *[_type == "homePage"][0].featuredStories[href == "/" + $slug][0].image.asset->url,
     body,
-    seo
+    seo,
+    "homeContent": *[_type == "homePage"][0]{
+      featuredStories[]{_key, category, title, description, href, "imageUrl": image.asset->url},
+      magazineArticles[]{_key, title, description, "imageUrl": image.asset->url},
+      keyArticles[]{_key, title, description, "imageUrl": image.asset->url},
+      experiencesArticles[]{_key, title, description, "imageUrl": image.asset->url}
+    }
   }
 `)
 
@@ -96,9 +101,23 @@ export type SanitySectionPage = {
   slug: string
   imageUrl?: string
   contentImageUrl?: string
-  linkedArticleImageUrl?: string
   body?: PortableTextBlock[]
   seo?: {title?: string; description?: string}
+  homeContent?: {
+    featuredStories?: SanityRelatedArticle[]
+    magazineArticles?: SanityRelatedArticle[]
+    keyArticles?: SanityRelatedArticle[]
+    experiencesArticles?: SanityRelatedArticle[]
+  }
+}
+
+export type SanityRelatedArticle = {
+  _key: string
+  title: string
+  description?: string
+  category?: string
+  href?: string
+  imageUrl?: string
 }
 
 export function blockToText(block?: PortableTextBlock) {
